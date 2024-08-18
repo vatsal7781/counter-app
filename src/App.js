@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import './index.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+
+export default function App() {
+  return <div className="App">
+    <Count />
+  </div>
 }
 
-export default App;
+
+function Count() {
+  const [count, setCount] = useState(0)
+  const [step, setStep] = useState(1)
+
+  function incStep() {
+    setStep(s => s + 1)
+  }
+  function decStep() {
+    if (step > 1) setStep(s => s - 1)
+  }
+  function incCount() {
+    setCount(c => c + step)
+  }
+  function decCount() {
+    setCount(c => c - step)
+  }
+  const date = new Date();
+  let day = date.getDate();
+  date.setDate(day + count)
+
+
+  return (
+    <>
+      <button onClick={decStep}>-</button>
+      <span>Step: {step}</span>
+      <button onClick={incStep}>+</button>
+
+      <br />
+
+      <button onClick={decCount}>-</button>
+      <span>Count: {count}</span>
+      <button onClick={incCount}>+</button>
+
+      <br />
+      {count === 0
+        ? <p>Today is {date.toDateString()} </p>
+        : count > 0
+          ?
+          <p>{count} days from today is {date.toDateString()} </p>
+          :
+          <p>{Math.abs(count)} days ago was {date.toDateString()} </p>}
+
+
+    </>)
+}
