@@ -2,9 +2,6 @@ import { useState } from "react"
 import './index.css';
 
 
-
-
-
 export default function App() {
   return <div className="App">
     <Count />
@@ -35,9 +32,14 @@ function Count() {
 
   return (
     <>
+      <label for="step">Step</label>
+      <input type="range" name="step" min="1" max="100" step='1' onChange={(e) => setStep(Number(e.target.value))}></input ><label for="step">{step}</label>
+      <br />
+
+      {/* 
       <button onClick={decStep}>-</button>
       <span>Step: {step}</span>
-      <button onClick={incStep}>+</button>
+      <button onClick={incStep}>+</button> */}
 
       <br />
 
@@ -46,13 +48,15 @@ function Count() {
       <button onClick={incCount}>+</button>
 
       <br />
-      {count === 0
-        ? <p>Today is {date.toDateString()} </p>
-        : count > 0
-          ?
-          <p>{count} days from today is {date.toDateString()} </p>
-          :
-          <p>{Math.abs(count)} days ago was {date.toDateString()} </p>}
+      {
+        count === 0
+          ? <p>Today is {date.toDateString()} </p>
+          : count > 0
+            ?
+            <p>{count} days from today is {date.toDateString()} </p>
+            :
+            <p>{Math.abs(count)} days ago was {date.toDateString()} </p>
+      }
 
 
     </>)
